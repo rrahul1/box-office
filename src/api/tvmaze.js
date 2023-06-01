@@ -9,3 +9,5 @@ const getMovies = async (searchQuery) => {
 export const searchForShows = (query) => getMovies(`/search/shows?q=${query}`);
 export const searchForPeople = (query) =>
   getMovies(`/search/people?q=${query}`);
+
+export const getShowById = (showId) => getMovies(`/shows/${showId}`);
