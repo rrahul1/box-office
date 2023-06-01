@@ -1,24 +1,21 @@
 import React, { useState } from "react";
 import { searchForPeople, searchForShows } from "../api/tvmaze";
+import SearchForm from "../components/SearchForm";
+import ShowsGrid from "../components/shows/ShowsGrid";
+import ActorsGrid from "../components/actors/ActorsGrid";
 
 function Home() {
-  const [searchValue, setSearchValue] = useState("");
   const [shows, setShows] = useState(null);
   const [showError, setShowError] = useState(null);
-  const [searchOption, setSearchOption] = useState("shows");
 
-  const handleSearch = (ev) => {
-    setSearchValue(ev.target.value);
-  };
-
-  const onSearch = async (e) => {
-    e.preventDefault();
+  const onSearch = async ({ q, searchOption }) => {
     try {
+      setShowError(null);
       if (searchOption === "shows") {
-        const showResult = await searchForShows(searchValue);
+        const showResult = await searchForShows(q);
         setShows(showResult);
       } else {
-        const actorResult = await searchForPeople(searchValue);
+        const actorResult = await searchForPeople(q);
         setShows(actorResult);
       }
     } catch (error) {
@@ -26,50 +23,28 @@ function Home() {
     }
   };
 
-  const handleRadioChange = (ev) => {
-    setSearchOption(ev.target.value);
-  };
-
   const renderShowsData = () => {
     if (showError) {
       return <div>Error Occured: {showError.message}</div>;
     }
+
+    if (shows?.length === 0) {
+      return <div>No Results</div>;
+    }
     if (shows) {
-      return shows[0].show
-        ? shows.map((data) => <div key={data.show.id}>{data.show.name}</div>)
-        : shows.map((data) => (
-            <div key={data.person.id}>{data.person.name}</div>
-          ));
+      return shows[0].show ? (
+        <ShowsGrid shows={shows} />
+      ) : (
+        <ActorsGrid actors={shows} />
+      );
     }
     return null;
   };
 
   return (
     <div>
-      <form onSubmit={onSearch}>
-        <input type="text" value={searchValue} onChange={handleSearch} />
-        <label>
-          Shows
-          <input
-            type="radio"
-            name="search-option"
-            value="shows"
-            checked={searchOption === "shows"}
-            onChange={handleRadioChange}
-          />
-        </label>
-        <label>
-          Actors
-          <input
-            type="radio"
-            name="search-option"
-            value="actors"
-            checked={searchOption === "actors"}
-            onChange={handleRadioChange}
-          />
-        </label>
-        <button type="submit">Search</button>
-      </form>
+      <SearchForm onSearch={onSearch} />
+
       <div>{renderShowsData()}</div>
     </div>
   );
