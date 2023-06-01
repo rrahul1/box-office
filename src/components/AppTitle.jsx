@@ -3,7 +3,7 @@ import React from "react";
 function AppTitle(props) {
   const {
     title = "Box Office",
-    subtitle = "Are you looking for a movie or an acttor",
+    subtitle = "Are you looking for a movie or an actor",
   } = props;
 
   return (

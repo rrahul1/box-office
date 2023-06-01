@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 function SearchForm({ onSearch }) {
   const [searchValue, setSearchValue] = useState("");
   const [searchOption, setSearchOption] = useState("shows");
-
-  useEffect(() => {}, []);
 
   const handleSearch = (ev) => {
     setSearchValue(ev.target.value);
