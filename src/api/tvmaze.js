@@ -10,4 +10,5 @@ export const searchForShows = (query) => getMovies(`/search/shows?q=${query}`);
 export const searchForPeople = (query) =>
   getMovies(`/search/people?q=${query}`);
 
-export const getShowById = (showId) => getMovies(`/shows/${showId}`);
+export const getShowById = (showId) =>
+  getMovies(`/shows/${showId}?embed[]=seasons&embed[]=cast`);
