@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-function ShowCard({ name, image, id, summary }) {
+function ShowCard({ name, image, id, summary, handleStarClick }) {
   const summaryStripped = summary
     ? summary.split(" ").slice(0, 10).join(" ").replace(/<.+?>/g, "")
     : "No Description";
@@ -14,8 +13,16 @@ function ShowCard({ name, image, id, summary }) {
       <h1>{name}</h1>
       <p>{summaryStripped}...</p>
       <div>
-        <Link to={`/show/${id}`}>Read More</Link>
-        <button>Star Me</button>
+        <a href={`/show/${id}`} target="_blank" rel="noreferrer">
+          Read More
+        </a>
+        <button
+          onClick={() => {
+            handleStarClick(id);
+          }}
+        >
+          Star Me
+        </button>
       </div>
     </div>
   );

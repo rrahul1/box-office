@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getShowById } from "../api/tvmaze";
 import { useQuery } from "@tanstack/react-query";
 import ShowMainData from "../components/shows/ShowMainData";
@@ -23,6 +23,8 @@ function ShowPage() {
   if (showData) {
     return (
       <div>
+        <Link to="/">Go back to home</Link>
+
         <ShowMainData
           image={showData.image}
           name={showData.name}
