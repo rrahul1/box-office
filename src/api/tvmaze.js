@@ -12,3 +12,8 @@ export const searchForPeople = (query) =>
 
 export const getShowById = (showId) =>
   getMovies(`/shows/${showId}?embed[]=seasons&embed[]=cast`);
+
+export const getShowsByIds = async (showIds) => {
+  const apiRequest = showIds.map((showId) => getMovies(`/shows/${showId}`));
+  return Promise.all(apiRequest);
+};

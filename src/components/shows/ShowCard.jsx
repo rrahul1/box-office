@@ -1,6 +1,6 @@
 import React from "react";
 
-function ShowCard({ name, image, id, summary, handleStarClick }) {
+function ShowCard({ name, image, id, summary, handleStarClick, isStarred }) {
   const summaryStripped = summary
     ? summary.split(" ").slice(0, 10).join(" ").replace(/<.+?>/g, "")
     : "No Description";
@@ -21,7 +21,7 @@ function ShowCard({ name, image, id, summary, handleStarClick }) {
             handleStarClick(id);
           }}
         >
-          Star Me
+          {isStarred ? "Unstar" : "Star"}
         </button>
       </div>
     </div>
