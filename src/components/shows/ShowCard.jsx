@@ -1,4 +1,7 @@
 import React from "react";
+import styled from "styled-components";
+import { SearchImgWrapper, SearchCard } from "../common/SearchCard";
+import { StarIcon } from "../common/StarIcon";
 
 function ShowCard({ name, image, id, summary, handleStarClick, isStarred }) {
   const summaryStripped = summary
@@ -6,26 +9,55 @@ function ShowCard({ name, image, id, summary, handleStarClick, isStarred }) {
     : "No Description";
 
   return (
-    <div>
-      <div>
+    <SearchCard>
+      <SearchImgWrapper>
         <img src={image} alt={name} />
-      </div>
+      </SearchImgWrapper>
       <h1>{name}</h1>
       <p>{summaryStripped}...</p>
-      <div>
+      <ActionSection>
         <a href={`/show/${id}`} target="_blank" rel="noreferrer">
           Read More
         </a>
-        <button
+        <StarBtn
           onClick={() => {
             handleStarClick(id);
           }}
         >
-          {isStarred ? "Unstar" : "Star"}
-        </button>
-      </div>
-    </div>
+          <StarIcon active={isStarred} />
+        </StarBtn>
+      </ActionSection>
+    </SearchCard>
   );
 }
 
 export default ShowCard;
+
+const ActionSection = styled.div`
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    text-decoration-color: #000;
+    color: #000;
+    &:hover {
+      text-decoration-color: blue;
+      color: blue;
+    }
+  }
+`;
+
+const StarBtn = styled.button`
+  outline: none;
+  border: 1px solid #8e8e8e;
+  border-radius: 15px;
+  padding: 5px 20px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+`;
