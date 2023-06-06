@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import notFound from "../../lib/not-found.png";
 
 function Cast({ cast }) {
   return (
@@ -8,7 +9,7 @@ function Cast({ cast }) {
         <div className="cast-item" key={person.id}>
           <div className="pic-wrapper">
             <img
-              src={person.image ? person.image.medium : "/not-found.png"}
+              src={person.image ? person.image.medium : notFound}
               alt={person.name}
             />
           </div>
