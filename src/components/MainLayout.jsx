@@ -6,8 +6,8 @@ import AppTitle from "./AppTitle";
 function MainLayout() {
   return (
     <div>
-      <Navs />
       <AppTitle />
+      <Navs />
       <Outlet />
     </div>
   );
